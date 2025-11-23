@@ -1,6 +1,7 @@
 import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
+import api from "../../api";  // <-- IMPORTANT
 import "./Auth.css";
 
 function Login() {
@@ -18,25 +19,14 @@ function Login() {
         return;
       }
 
-      const res = await fetch("http://localhost:5000/api/auth/login", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, password }),
-      });
+      // USE AXIOS INSTANCE — NOT FETCH
+      const res = await api.post("/api/auth/login", { email, password });
 
-      const data = await res.json();
-
-      if (!res.ok) {
-        setError(data.message);
-        return;
-      }
-
-      // Save token + email to AuthContext
-      login(data.token, data.email);
-
+      login(res.data.token, res.data.email);
       navigate("/tasks");
+
     } catch (err) {
-      setError("Login failed");
+      setError(err.response?.data?.message || "Login failed");
     }
   };
 
