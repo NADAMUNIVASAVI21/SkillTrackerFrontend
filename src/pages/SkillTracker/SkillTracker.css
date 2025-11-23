@@ -1,0 +1,135 @@
+/* FULL PAGE BACKGROUND + CENTER */
+.page-wrapper {
+  width: 100%;
+  min-height: 100vh;
+  background: #f7f0ff;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding-top: 60px;
+}
+
+/* WHITE BOX */
+.skills-box {
+  width: 600px;
+  background: #ffffff;
+  padding: 35px 40px;
+  border-radius: 20px;
+  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.12);
+}
+
+/* HEADING */
+.skills-box h2 {
+  color: #6f2dbd;
+  text-align: center;
+  margin-bottom: 25px;
+}
+
+/* INPUT ROW */
+.skill-input-row {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.skill-input-row input {
+  flex: 1;
+  padding: 12px;
+  border-radius: 10px;
+  border: 2px solid #c9b2ff;
+  background: #f7f1ff;
+  outline: none;
+}
+
+.skill-input-row input:focus {
+  border-color: #9d77ff;
+}
+
+.skill-input-row button {
+  background: #6f2dbd;
+  color: white;
+  padding: 12px 18px;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+/* SKILL CARD */
+.skills-container {
+  margin-top: 20px;
+}
+
+.skill-card {
+  background: #e8d7ff;
+  padding: 16px 18px;
+  border-radius: 12px;
+  margin-bottom: 15px;
+  
+  position: relative;   /* <-- REQUIRED */
+
+
+}
+
+/* CARD HEADER */
+.skill-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.skill-name {
+  font-weight: 600;
+  color: #4b2e83;
+}
+
+/* DELETE BUTTON */
+.delete-btn {
+  position: absolute;
+  top: 0px;
+  right: -12px;
+  background: none;
+  border: none;
+  font-size: 18px;
+  color: #7b1fa2;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.delete-btn:hover {
+  color: #5a0080;
+  transform: scale(1.2);
+}
+
+
+/* SLIDER */
+.skill-card input[type="range"] {
+  width: 100%;
+  margin-top: 10px;
+}
+
+/* LEVEL TEXT */
+.skill-level {
+  text-align: right;
+  color: #4b2e83;
+  font-weight: 600;
+  margin-top: 5px;
+}
+
+.notes-box {
+  width: 100%;
+  height: 80px;
+  margin-top: 10px;
+  padding: 10px;
+  border: 2px solid #c89bff;
+  border-radius: 10px;
+  background: white;
+}
+
+.saved-notes {
+  background: #f3e7ff;
+  padding: 10px;
+  border-radius: 10px;
+  margin-top: 10px;
+  border-left: 4px solid #6a0dad;
+}

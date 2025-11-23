@@ -1,0 +1,55 @@
+/* FULL SCREEN LAYOUT */
+.landing {
+  height: 100vh;
+  width: 100%;
+  background: #f7f0ff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 80px;
+  box-sizing: border-box;
+}
+
+/* LEFT SIDE TEXT AREA */
+.left {
+  display: flex;
+  flex-direction: column; /* Title on top, button below */
+  align-items: flex-start; /* LEFT ALIGN */
+}
+.left h1 {
+  font-size: 50px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: #c57bff;
+  line-height: 1.2;
+  margin-bottom: 30px;
+  margin-left: 200px;
+}
+
+.signin-btn {
+  background: #d5a2ff;
+  color: white;
+  padding: 15px 50px;
+  border-radius: 40px;
+  border: none;
+  font-size: 18px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.25s ease;
+  margin-left: 40px;
+}
+
+
+.signin-btn:hover {
+  background: #bd79ff;
+}
+
+/* RIGHT SIDE PC IMAGE — NO BACKGROUND FRAME */
+
+
+/* PC IMAGE — BIGGER SIZE */
+.pc-img {
+  width: 850px;     /* Increased from ~430px */
+  height: auto;
+  
+}

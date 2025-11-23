@@ -1,0 +1,76 @@
+/* OUTER WHITE CARD */
+.auth-box {
+  width: 380px;
+  margin: 120px auto;
+  background: #ffffff;
+  padding: 40px 50px;
+  border-radius: 28px;
+  box-shadow: 0px 12px 25px rgba(0, 0, 0, 0.15);
+  text-align: center;
+}
+
+/* HEADING */
+.auth-box h2 {
+  color: #6f2dbd;
+  font-size: 26px;
+  margin-bottom: 30px;
+}
+
+/* INPUT FIELD */
+.auth-box input {
+  width: 100%;
+  padding: 12px;
+  border: 2px solid #bfa4ff;
+  background: #f7f1ff;
+  border-radius: 18px;
+  margin-bottom: 20px;
+  font-size: 15px;
+  outline: none;
+  transition: 0.2s ease;
+}
+
+.auth-box input:focus {
+  border-color: #9b6fff;
+}
+
+/* BUTTON */
+.auth-box button {
+  width: 100%;
+  padding: 12px;
+  background: #6f2dbd;
+  color: white;
+  border: none;
+  border-radius: 18px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.25s ease-in-out;
+}
+
+.auth-box button:hover {
+  background: #591f9c;
+}
+
+/* FOOTER TEXT */
+.auth-box p {
+  margin-top: 18px;
+  font-size: 14px;
+  color: #4a3c69;
+}
+
+/* CLICKABLE LINK */
+.link {
+  color: #6f2dbd;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.link:hover {
+  text-decoration: underline;
+}
+
+.error {
+  color: red;
+  font-size: 14px;
+  margin-bottom: 10px;
+}

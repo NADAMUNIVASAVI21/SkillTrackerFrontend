@@ -1,0 +1,99 @@
+/* FULL PAGE BACKDROP */
+.page-wrapper {
+  width: 100%;
+  min-height: 100vh;
+  background: #f7f0ff; /* soft lavender */
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding-top: 60px;
+}
+
+/* MAIN WHITE BOX */
+.ai-box {
+  width: 650px;
+  background: #ffffff;
+  padding: 35px 40px;
+  border-radius: 20px;
+  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.12);
+}
+
+/* TITLE */
+.ai-box h2 {
+  text-align: center;
+  color: #6f2dbd;
+  margin-bottom: 25px;
+}
+
+/* GOAL INPUT */
+.goal-input {
+  width: 100%;
+  padding: 12px;
+  border-radius: 12px;
+  border: 2px solid #c9b2ff;
+  background: #f7f1ff;
+  outline: none;
+  margin-bottom: 15px;
+}
+
+.goal-input:focus {
+  border-color: #9d77ff;
+}
+
+/* GENERATE BUTTON */
+.ai-box button {
+  background: #6f2dbd;
+  color: white;
+  padding: 12px 20px;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+  margin-top: 5px;
+  margin-bottom: 20px;
+}
+
+/* OUTPUT BOX */
+.output-box {
+  background: #e8d7ff;
+  padding: 15px;
+  border-radius: 12px;
+  white-space: pre-wrap;
+  line-height: 1.4;
+  color: #4b2e83;
+  margin-bottom: 25px;
+}
+
+/* HISTORY */
+.history-box {
+  margin-top: 25px;
+}
+
+.history-box h3 {
+  color: #6f2dbd;
+  margin-bottom: 10px;
+}
+
+/* HISTORY CARD */
+.history-card {
+  background: #f2e7ff;
+  padding: 14px;
+  border-radius: 12px;
+  margin-bottom: 15px;
+}
+
+.history-card strong {
+  color: #4b2e83;
+}
+
+.history-card pre {
+  white-space: pre-wrap;
+  margin-top: 8px;
+  color: #4b2e83;
+}
+
+/* CLEAR HISTORY BUTTON */
+.clear-btn {
+  background: #b05cff !important;
+  margin-top: 10px;
+}
