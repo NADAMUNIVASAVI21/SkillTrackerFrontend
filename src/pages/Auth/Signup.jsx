@@ -15,21 +15,15 @@ function Signup() {
   const handleSignup = async () => {
     try {
       if (!email || !password || !confirm) {
-        setError("Please fill all fields");
-        return;
-      }
-
-      if (password.length < 6) {
-        setError("Password must be at least 6 characters");
-        return;
+        return setError("All fields required");
       }
 
       if (password !== confirm) {
-        setError("Passwords do not match");
-        return;
+        return setError("Passwords do not match");
       }
 
       await signup(email, password);
+
       navigate("/login");
     } catch (err) {
       setError(err.response?.data?.message || "Signup failed");
@@ -51,7 +45,7 @@ function Signup() {
 
       <input
         type="password"
-        placeholder="Password (min 6 characters)"
+        placeholder="Password (min 6 chars)"
         value={password}
         onChange={(e) => setPassword(e.target.value)}
       />

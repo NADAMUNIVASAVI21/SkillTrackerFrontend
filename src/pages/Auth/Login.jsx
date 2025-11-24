@@ -1,7 +1,6 @@
 import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
-import api from "../../api"; 
 import "./Auth.css";
 
 function Login() {
@@ -15,19 +14,14 @@ function Login() {
   const handleLogin = async () => {
     try {
       if (!email || !password) {
-        setError("Please fill all fields");
-        return;
+        return setError("All fields required");
       }
 
-      const res = await api.post("/api/auth/login", {
-        email,
-        password,
-      });
+      await login(email, password);
 
-      login(res.data.token, res.data.email);
       navigate("/tasks");
     } catch (err) {
-      setError(err.response?.data?.message || "Login failed");
+      setError("Invalid email or password");
     }
   };
 
