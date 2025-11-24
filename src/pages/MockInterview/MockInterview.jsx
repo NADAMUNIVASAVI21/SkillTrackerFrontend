@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import api from "../api";
+import api from "../../api";
 import "./MockInterview.css";
 
 function MockInterview() {
@@ -46,7 +46,10 @@ function MockInterview() {
         return alert("Write an answer first!");
       }
 
-      const response = await api.post("/mock/evaluate", { question, answer });
+      const response = await api.post("/mock/evaluate", {
+        question,
+        answer,
+      });
 
       setEvaluations({
         ...evaluations,
@@ -96,7 +99,10 @@ function MockInterview() {
                   placeholder="Write your answer..."
                 />
 
-                <button className="evaluate-btn" onClick={() => evaluateAnswer(q)}>
+                <button
+                  className="evaluate-btn"
+                  onClick={() => evaluateAnswer(q)}
+                >
                   Evaluate Answer
                 </button>
 
