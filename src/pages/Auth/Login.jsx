@@ -1,16 +1,25 @@
+<<<<<<< HEAD
 import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
 import "./Auth.css";
+=======
+import axios from "axios";
+>>>>>>> 2d5effb8f40e0bc0806a95576f14a7b832374598
 
-function Login() {
-  const { login } = useContext(AuthContext);
-  const navigate = useNavigate();
+const api = axios.create({
+  baseURL: "https://skilltrackerbackend-production.up.railway.app/api",
+});
 
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
+api.interceptors.request.use((config) => {
+  const token = localStorage.getItem("token");
+  if (token) {
+    config.headers.Authorization = `Bearer ${token}`;
+  }
+  return config;
+});
 
+<<<<<<< HEAD
   const handleLogin = async () => {
     try {
       if (!email || !password) {
@@ -58,3 +67,6 @@ function Login() {
 }
 
 export default Login;
+=======
+export default api;
+>>>>>>> 2d5effb8f40e0bc0806a95576f14a7b832374598
