@@ -3,13 +3,13 @@ import axios from "axios";
 
 export const AuthContext = createContext();
 
-const API_URL = "http://localhost:5000/api"; 
-// Change to your Railway backend URL after deployment
+// Use environment variable instead of localhost
+const API_URL = import.meta.env.VITE_API_URL;
 
 export function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
 
-  // Load user from storage on refresh
+  // Load user on refresh
   useEffect(() => {
     const saved = localStorage.getItem("user");
     if (saved) {
@@ -37,7 +37,6 @@ export function AuthProvider({ children }) {
       password,
     });
 
-    // Save token + email
     const userData = {
       token: res.data.token,
       email: res.data.email,
