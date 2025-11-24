@@ -1,46 +1,29 @@
 import { useState, useEffect } from "react";
-import axios from "axios";
+import api from "../../api";
 import "./Tasks.css";
 
 function Tasks() {
   const [tasks, setTasks] = useState([]);
   const [newTask, setNewTask] = useState("");
 
-  // Load tasks from backend on start
   useEffect(() => {
     fetchTasks();
   }, []);
 
   const fetchTasks = async () => {
     try {
-      const user = JSON.parse(localStorage.getItem("user"));
-      const token = user?.token;
-
-      const response = await axios.get("http://localhost:5000/api/tasks", {
-        headers: { Authorization: `Bearer ${token}` },
-      });
-
+      const response = await api.get("/tasks");
       setTasks(response.data);
     } catch (error) {
       console.error("Error loading tasks:", error);
     }
   };
 
-  // Add new task (backend)
   const addTask = async () => {
     if (!newTask.trim()) return;
 
     try {
-      const user = JSON.parse(localStorage.getItem("user"));
-      const token = user?.token;
-
-      const response = await axios.post(
-        "http://localhost:5000/api/tasks",
-        { text: newTask },
-        {
-          headers: { Authorization: `Bearer ${token}` },
-        }
-      );
+      const response = await api.post("/tasks", { text: newTask });
 
       setTasks([response.data, ...tasks]);
       setNewTask("");
@@ -49,21 +32,12 @@ function Tasks() {
     }
   };
 
-  // Toggle complete (backend update)
   const toggleTask = async (id, currentState) => {
     try {
-      const user = JSON.parse(localStorage.getItem("user"));
-      const token = user?.token;
+      const response = await api.put(`/tasks/${id}`, {
+        completed: !currentState,
+      });
 
-      const response = await axios.put(
-        `http://localhost:5000/api/tasks/${id}`,
-        { completed: !currentState },
-        {
-          headers: { Authorization: `Bearer ${token}` },
-        }
-      );
-
-      // Update UI
       setTasks(
         tasks
           .map((task) =>
@@ -75,8 +49,6 @@ function Tasks() {
       console.error("Error updating task:", err);
     }
   };
-
-
 
   return (
     <div className="task-container">
@@ -97,7 +69,6 @@ function Tasks() {
 
         {tasks.map((task) => (
           <div key={task._id} className={`task-card ${task.completed ? "done" : ""}`}>
-            
             <div className="left">
               <input
                 type="checkbox"
@@ -106,8 +77,6 @@ function Tasks() {
               />
               <span className="task-text">{task.text}</span>
             </div>
-
-            
           </div>
         ))}
       </div>
