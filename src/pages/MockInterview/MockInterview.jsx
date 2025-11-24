@@ -29,7 +29,7 @@ function MockInterview() {
       const token = user?.token;
 
       const response = await axios.post(
-        "http://localhost:5000/api/mock/generate",
+        "https://skilltrackerbackend-production.up.railway.app/api/mock/generate",
         { role: category },
         {
           headers: { Authorization: `Bearer ${token}` },
