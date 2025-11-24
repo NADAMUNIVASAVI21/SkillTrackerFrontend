@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import axios from "axios";
+import api from "../api";
 import "./MockInterview.css";
 
 function MockInterview() {
@@ -9,32 +9,20 @@ function MockInterview() {
   const [evaluations, setEvaluations] = useState({});
   const [loading, setLoading] = useState(false);
 
-  // Load saved answers
   useEffect(() => {
     const saved = localStorage.getItem("interview_answers");
     if (saved) setAnswers(JSON.parse(saved));
   }, []);
 
-  // Save answers
   useEffect(() => {
     localStorage.setItem("interview_answers", JSON.stringify(answers));
   }, [answers]);
 
-  // Fetch AI-generated questions
   const generateQuestions = async () => {
     try {
       setLoading(true);
 
-      const user = JSON.parse(localStorage.getItem("user"));
-      const token = user?.token;
-
-      const response = await axios.post(
-        "https://skilltrackerbackend-production.up.railway.app/api/mock/generate",
-        { role: category },
-        {
-          headers: { Authorization: `Bearer ${token}` },
-        }
-      );
+      const response = await api.post("/mock/generate", { role: category });
 
       const qs = response.data.questions.filter((q) => q.trim() !== "");
       setQuestions(qs);
@@ -47,27 +35,18 @@ function MockInterview() {
     setLoading(false);
   };
 
-  // Save answer
   const handleAnswer = (q, text) => {
     setAnswers({ ...answers, [q]: text });
   };
 
-  // AI evaluate a single answer
   const evaluateAnswer = async (question) => {
     try {
       const answer = answers[question];
-      if (!answer || !answer.trim()) return alert("Write an answer first!");
+      if (!answer || !answer.trim()) {
+        return alert("Write an answer first!");
+      }
 
-      const user = JSON.parse(localStorage.getItem("user"));
-      const token = user?.token;
-
-      const response = await axios.post(
-        "http://localhost:5000/api/mock/evaluate",
-        { question, answer },
-        {
-          headers: { Authorization: `Bearer ${token}` },
-        }
-      );
+      const response = await api.post("/mock/evaluate", { question, answer });
 
       setEvaluations({
         ...evaluations,
@@ -117,10 +96,7 @@ function MockInterview() {
                   placeholder="Write your answer..."
                 />
 
-                <button
-                  className="evaluate-btn"
-                  onClick={() => evaluateAnswer(q)}
-                >
+                <button className="evaluate-btn" onClick={() => evaluateAnswer(q)}>
                   Evaluate Answer
                 </button>
 
