@@ -1,44 +1,33 @@
 import { useState, useEffect } from "react";
-import axios from "axios";
+import api from "../../api";
 import "./SkillTracker.css";
 
 function SkillTracker() {
   const [skillName, setSkillName] = useState("");
   const [skills, setSkills] = useState([]);
 
-  // Load skills from backend
   useEffect(() => {
     fetchSkills();
   }, []);
 
   const fetchSkills = async () => {
     try {
-      const user = JSON.parse(localStorage.getItem("user"));
-      const token = user?.token;
-
-      const res = await axios.get("http://localhost:5000/api/skills", {
-        headers: { Authorization: `Bearer ${token}` },
-      });
-
+      const res = await api.get("/skills");
       setSkills(res.data);
     } catch (err) {
       console.error("Error fetching skills:", err);
     }
   };
 
-  // Add Skill (POST)
   const addSkill = async () => {
     if (!skillName.trim()) return;
 
     try {
-      const user = JSON.parse(localStorage.getItem("user"));
-      const token = user?.token;
-
-      const res = await axios.post(
-        "http://localhost:5000/api/skills",
-        { name: skillName, level: 50, notes: "" },
-        { headers: { Authorization: `Bearer ${token}` } }
-      );
+      const res = await api.post("/skills", {
+        name: skillName,
+        level: 50,
+        notes: "",
+      });
 
       setSkills([res.data, ...skills]);
       setSkillName("");
@@ -47,52 +36,27 @@ function SkillTracker() {
     }
   };
 
-  // Update Level (PUT)
   const updateLevel = async (id, value) => {
     try {
-      const user = JSON.parse(localStorage.getItem("user"));
-      const token = user?.token;
-
-      const res = await axios.put(
-        `http://localhost:5000/api/skills/${id}`,
-        { level: value },
-        { headers: { Authorization: `Bearer ${token}` } }
-      );
-
+      const res = await api.put(`/skills/${id}`, { level: value });
       setSkills(skills.map((s) => (s._id === id ? res.data : s)));
     } catch (err) {
       console.error("Error updating level:", err);
     }
   };
 
-  // Update Notes (PUT)
   const updateNotes = async (id, text) => {
     try {
-      const user = JSON.parse(localStorage.getItem("user"));
-      const token = user?.token;
-
-      const res = await axios.put(
-        `http://localhost:5000/api/skills/${id}`,
-        { notes: text },
-        { headers: { Authorization: `Bearer ${token}` } }
-      );
-
+      const res = await api.put(`/skills/${id}`, { notes: text });
       setSkills(skills.map((s) => (s._id === id ? res.data : s)));
     } catch (err) {
       console.error("Error updating notes:", err);
     }
   };
 
-  // Delete skill
   const deleteSkill = async (id) => {
     try {
-      const user = JSON.parse(localStorage.getItem("user"));
-      const token = user?.token;
-
-      await axios.delete(`http://localhost:5000/api/skills/${id}`, {
-        headers: { Authorization: `Bearer ${token}` },
-      });
-
+      await api.delete(`/skills/${id}`);
       setSkills(skills.filter((s) => s._id !== id));
     } catch (err) {
       console.error("Error deleting skill:", err);
@@ -117,13 +81,9 @@ function SkillTracker() {
         <div className="skills-container">
           {skills.map((skill) => (
             <div key={skill._id} className="skill-card">
-
               <div className="skill-header">
                 <span className="skill-name">{skill.name}</span>
-                <button
-                  className="delete-btn"
-                  onClick={() => deleteSkill(skill._id)}
-                >
+                <button className="delete-btn" onClick={() => deleteSkill(skill._id)}>
                   ✕
                 </button>
               </div>
@@ -151,7 +111,6 @@ function SkillTracker() {
                   <p>{skill.notes}</p>
                 </div>
               )}
-
             </div>
           ))}
         </div>
