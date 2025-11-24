@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import axios from "axios";
+import api from "../api";
 import "./AIBot.css";
 
 function AIBot() {
@@ -8,13 +8,11 @@ function AIBot() {
   const [history, setHistory] = useState([]);
   const [loading, setLoading] = useState(false);
 
-  // Load saved history
   useEffect(() => {
     const saved = localStorage.getItem("ai_history");
     if (saved) setHistory(JSON.parse(saved));
   }, []);
 
-  // Save whenever history updates
   useEffect(() => {
     localStorage.setItem("ai_history", JSON.stringify(history));
   }, [history]);
@@ -25,27 +23,12 @@ function AIBot() {
     try {
       setLoading(true);
 
-      // Get user token
-      const user = JSON.parse(localStorage.getItem("user"));
-      const token = user?.token;
-
-      // Call backend route
-      const response = await axios.post(
-        "https://skilltrackerbackend-production.up.railway.app/api/ai-bot/generate",
-        { goal },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
+      const response = await api.post("/ai-bot/generate", { goal });
 
       const roadmap = response.data.output;
-
       setOutput(roadmap);
 
       setHistory([{ id: Date.now(), goal, roadmap }, ...history]);
-
       setGoal("");
     } catch (err) {
       console.error(err);
@@ -77,9 +60,7 @@ function AIBot() {
           {loading ? "Generating..." : "Generate"}
         </button>
 
-        {output && (
-          <pre className="output-box">{output}</pre>
-        )}
+        {output && <pre className="output-box">{output}</pre>}
 
         {history.length > 0 && (
           <div className="history-box">
