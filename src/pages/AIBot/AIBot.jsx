@@ -31,7 +31,7 @@ function AIBot() {
 
       // Call backend route
       const response = await axios.post(
-        "https://skilltrackerbackend-production.up.railway.app//api/ai-bot/generate",
+        "https://skilltrackerbackend-production.up.railway.app/api/ai-bot/generate",
         { goal },
         {
           headers: {
